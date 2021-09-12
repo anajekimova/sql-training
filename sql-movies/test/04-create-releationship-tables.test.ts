@@ -10,15 +10,45 @@ import { Database } from "../src/database";
 import { tableInfo } from "../src/queries/table-info";
 import { minutes, Log } from "./utils";
 
-const CREATE_MOVIE_GENRES_TABLE = ``;
+const CREATE_MOVIE_GENRES_TABLE = `CREATE TABLE ${MOVIE_GENRES}(
+  movie_id integer not null,
+  genre_id integer not null,
+  FOREIGN KEY(movie_id) REFERENCES movie(id)
+  FOREIGN KEY(genre_id) REFERENCES genre(id)
+  PRIMARY KEY(movie_id, genre_id) 
+)`;
 
-const CREATE_MOVIE_ACTORS_TABLE = ``;
+const CREATE_MOVIE_ACTORS_TABLE = `CREATE TABLE ${MOVIE_ACTORS}(
+  movie_id integer not null,
+  actor_id integer not null,
+  FOREIGN KEY(movie_id) REFERENCES movie(id)
+  FOREIGN KEY(actor_id) REFERENCES actor(id)
+  PRIMARY KEY(movie_id, actor_id) 
+)`;
 
-const CREATE_MOVIE_DIRECTORS_TABLE = ``;
+const CREATE_MOVIE_DIRECTORS_TABLE = `CREATE TABL ${MOVIE_DIRECTORS}(
+  movie_id integer not null,
+  director_id integer not null,
+  FOREIGN KEY(movie_id) REFERENCES movie(id)
+  FOREIGN KEY(director_id) REFERENCES director(id)
+  PRIMARY KEY(movie_id, director_id) 
+)`;
 
-const CREATE_MOVIE_KEYWORDS_TABLE = ``;
+const CREATE_MOVIE_KEYWORDS_TABLE = `CREATE TABLE ${MOVIE_KEYWORDS}(
+  movie_id integer not null,
+  keyword_id integer not null,
+  FOREIGN KEY(movie_id) REFERENCES movie(id)
+  FOREIGN KEY(keyword_id) REFERENCES keyword(id)
+  PRIMARY KEY(movie_id, keyword_id) 
+)`;
 
-const CREATE_MOVIE_PRODUCTION_COMPANIES_TABLE = ``;
+const CREATE_MOVIE_PRODUCTION_COMPANIES_TABLE = `CREATE TABLE ${MOVIE_PRODUCTION_COMPANIES}(
+  movie_id integer not null,
+  company_id integer not null,
+  FOREIGN KEY(movie_id) REFERENCES movie(id)
+  FOREIGN KEY(company_id) REFERENCES company(id)
+  PRIMARY KEY(movie_id, company_id)
+)`;
 
 describe("Insert Combined Data", () => {
   let db: Database;
