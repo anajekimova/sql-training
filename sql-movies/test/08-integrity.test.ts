@@ -22,7 +22,7 @@ describe("Foreign Keys", () => {
     "should not be able delete genres if any movie is linked",
     async done => {
       const genreId = 5;
-      const query = `DELETE FROM genres WHERE id = ${genreId}`;
+      const query = `DELETE FROM genres WHERE id = '${genreId}''`;
       try {
         await db.delete(query);
       } catch (e) {}
@@ -39,7 +39,7 @@ describe("Foreign Keys", () => {
     "should not be able delete director if any movie is linked",
     async done => {
       const directorId = 7;
-      const query = `DELETE FROM directors WHERE id = ${directorId}`;
+      const query = `DELETE FROM directors WHERE id = ''${directorId}`;
       try {
         await db.delete(query);
       } catch (e) {}
@@ -56,7 +56,7 @@ describe("Foreign Keys", () => {
     "should not be able delete actor if any movie is linked",
     async done => {
       const actorId = 10;
-      const query = `DELETE FROM actors WHERE id = ${actorId}`;
+      const query = `DELETE FROM actors WHERE id = ''${actorId}`;
       try {
         await db.delete(query);
       } catch (e) {}
@@ -73,7 +73,7 @@ describe("Foreign Keys", () => {
     "should not be able delete keyword if any movie is linked",
     async done => {
       const keywordId = 12;
-      const query = `DELETE FROM keywords WHERE id = ${keywordId}`;
+      const query = `DELETE FROM keywords WHERE id = ''${keywordId}`;
       try {
         await db.delete(query);
       } catch (e) {}
@@ -90,7 +90,7 @@ describe("Foreign Keys", () => {
     "should not be able delete production company if any movie is linked",
     async done => {
       const companyId = 12;
-      const query = `DELETE FROM production_companies WHERE id = ${companyId}`;
+      const query = `DELETE FROM production_companies WHERE id = ''${companyId}`;
       try {
         await db.delete(query);
       } catch (e) {}
@@ -109,7 +109,7 @@ describe("Foreign Keys", () => {
     "should not be able delete movie if there are any linked data present",
     async done => {
       const movieId = 100;
-      const query = `DELETE FROM movies WHERE id = ${movieId}`;
+      const query = `DELETE FROM movies WHERE id = ''${movieId}`;
       try {
         await db.delete(query);
       } catch (e) {}

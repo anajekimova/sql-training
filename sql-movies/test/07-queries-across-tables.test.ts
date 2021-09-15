@@ -127,14 +127,14 @@ describe("Queries Across Tables", () => {
   it(
     "should select three genres which has most ratings with 5 stars",
     async done => {
-      const query = `SELECT 
-      genre, count(genre) as five_stars_count
-      FROM genres
-      JOIN movie_genreSs on movie_genres.genre_id=genres.id
-      JOIN movie_ratings on movie_ratings.movie_id=movie_genres.movie_id
-      WHERE movie_ratings.rating = 5
-      GROUP by genre
-      ORDER by five_stars_count DESC 
+      const query = `SELECT genres.genre, count(movie_ratings.rating) as five_stars_count
+      FROM genres, movie_ratings, movie_genres, movies
+      WHERE movie_ratings.movie_id = movies.imdb_id 
+      and genres.id = movie_genres.genre_id 
+      and movie_ratings.rating = 5.0
+      and movies.id = movie_genres.movie_id
+      GROUP by genre 
+      ORDER by five_stars_count desc
       LIMIT 3`;
       const result = await db.selectMultipleRows(query);
 
@@ -161,12 +161,13 @@ describe("Queries Across Tables", () => {
   it(
     "should select top three genres ordered by average rating",
     async done => {
-      const query = `SELECT genre, round(avg(movie_ratings.rating), 2) as avg_rating
-      FROM genres
-      JOIN movie_genres on movie_genres.genre_id = genre_id
-      JOIN movie_ratings on movie_ratings.movie_id = movie_genres.movie_id
+      const query = `SELECT genre, round(AVG(movie_ratings.rating), 2) as avg_rating
+      FROM genres, movie_ratings, movie_genres, movies
+      WHERE genres.id = movie_genres.genre_id
+      and movies.id = movie_genres.movie_id
+      and movie_ratings.movie_id = movies.imdb_id
       GROUP by genre
-      ORDER by avg_rating DESC
+      ORDER by avg_rating desc
       LIMIT 3`;
       const result = await db.selectMultipleRows(query);
 

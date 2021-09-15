@@ -1,5 +1,5 @@
 export const selectActorByName = (fullName: string): string => {
-  return `SELECT * FROM actors WHERE full_name = '${fullName}'`;
+  return `SELECT  * FROM actors WHERE full_name = '${fullName}'`;
 };
 
 export const selectKeyword = (keyword: string): string => {
